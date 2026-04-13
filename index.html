@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aprende Inglés</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FasterLearn</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="welcome">
+    <a href="index.html" class="logo">FasterLearn</a>
 
-  <div class="app">
-    <h1>Aprende Inglés 🎧</h1>
-    <h2 id="palabra">Loading...</h2>
+    <div class="slogan">
+        <p>Hi Welcome</p>
+        <p>Select what you want to learn today</p>
+    </div>
 
-    <div id="opciones" class="opciones"></div>
-
-    <p id="nivel">Nivel: 1</p>
-  </div>
-
-<script src="app.js"></script>
+    <div class="list">
+        <a class="list_item purple" href="game.html?category=colors">Colores</a>
+        <a class="list_item pink" href="game.html?category=animals">Animales</a>
+        <a class="list_item yellow" href="game.html?category=numbers">Numeros</a>
+        <a class="list_item blue" href="game.html?category=objects">Objetos</a>
+        <a class="list_item green" href="game.html?category=words">Palabras</a>
+    </div>
 </body>
 </html>
