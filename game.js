@@ -4,7 +4,7 @@ const categoryMap = {
   colors: "colors",
   animals: "animals",
   numbers: "numbers",
-  objets: "objets",
+  objects: "objects",
   words: "words"
 };
 
@@ -19,7 +19,7 @@ function getCategoryTitle(key) {
     colors: "Colores",
     animals: "Animales",
     numbers: "Numeros",
-    objets: "Objetos",
+    objects: "Objetos",
     words: "Palabras"
   }[key] || "Palabras";
 }
