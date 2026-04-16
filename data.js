@@ -9,7 +9,29 @@ const quizData = {
     { word: "white", correct: 2, options: ["gris", "morado", "blanco", "naranja"] },
     { word: "purple", correct: 3, options: ["rojo", "marron", "amarillo", "morado"] },
     { word: "orange", correct: 0, options: ["naranja", "azul", "blanco", "rosa"] },
-    { word: "brown", correct: 2, options: ["verde", "negro", "marron", "gris"] }
+    { word: "brown", correct: 2, options: ["verde", "negro", "marron", "gris"] },
+
+    { word: "gray", correct: 1, options: ["negro", "gris", "blanco", "azul"] },
+    { word: "gold", correct: 0, options: ["dorado", "plateado", "amarillo", "marron"] },
+    { word: "silver", correct: 2, options: ["gris", "blanco", "plateado", "negro"] },
+    { word: "beige", correct: 3, options: ["gris", "blanco", "amarillo", "beige"] },
+    { word: "cyan", correct: 1, options: ["azul", "cian", "verde", "turquesa"] },
+    { word: "magenta", correct: 0, options: ["magenta", "rosa", "rojo", "morado"] },
+    { word: "turquoise", correct: 2, options: ["verde", "azul", "turquesa", "cian"] },
+    { word: "navy", correct: 3, options: ["azul", "negro", "gris", "azul marino"] },
+    { word: "maroon", correct: 1, options: ["rojo", "granate", "marron", "negro"] },
+    { word: "lime", correct: 0, options: ["verde lima", "verde", "amarillo", "cian"] },
+
+    { word: "olive", correct: 2, options: ["verde", "marron", "verde oliva", "gris"] },
+    { word: "teal", correct: 1, options: ["azul", "verde azulado", "cian", "verde"] },
+    { word: "indigo", correct: 3, options: ["azul", "morado", "negro", "índigo"] },
+    { word: "violet", correct: 0, options: ["violeta", "morado", "rosa", "azul"] },
+    { word: "peach", correct: 2, options: ["rosa", "naranja", "durazno", "amarillo"] },
+    { word: "mint", correct: 1, options: ["verde", "menta", "cian", "blanco"] },
+    { word: "lavender", correct: 3, options: ["rosa", "lila", "morado", "lavanda"] },
+    { word: "coral", correct: 0, options: ["coral", "naranja", "rosa", "rojo"] },
+    { word: "salmon", correct: 2, options: ["rosa", "rojo", "salmón", "naranja"] },
+    { word: "chocolate", correct: 1, options: ["marron", "chocolate", "negro", "cafe"] }
   ],
   animals: [
     { word: "dog", correct: 0, options: ["perro", "gato", "pez", "pajaro"] },

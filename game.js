@@ -13,6 +13,13 @@ const storageKey = `fasterlearn-${categoryKey}`;
 let questions = [];
 let current = 0;
 let score = 0;
+const successSound = new Audio("sonidos/exito.mp3");
+successSound.preload = "auto";
+
+function playSuccessSound() {
+  successSound.currentTime = 0;
+  successSound.play().catch(() => {});
+}
 
 function getCategoryTitle(key) {
   return {
@@ -113,6 +120,7 @@ function checkAnswer(selected, correct, button) {
     score += 1;
     current += 1;
     saveState();
+    playSuccessSound();
 
     setTimeout(() => {
       renderQuestion();
