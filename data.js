@@ -1,220 +1,682 @@
-const quizData = {
-  colors: [
-    { word: "blue", correct: 0, options: ["azul", "morado", "rosa", "negro"] },
-    { word: "pink", correct: 1, options: ["morado", "rosa", "gris", "blanco"] },
-    { word: "red", correct: 2, options: ["verde", "azul", "rojo", "gris"] },
-    { word: "green", correct: 3, options: ["amarillo", "negro", "naranja", "verde"] },
-    { word: "yellow", correct: 0, options: ["amarillo", "rojo", "azul", "marron"] },
-    { word: "black", correct: 1, options: ["blanco", "negro", "rosa", "verde"] },
-    { word: "white", correct: 2, options: ["gris", "morado", "blanco", "naranja"] },
-    { word: "purple", correct: 3, options: ["rojo", "marron", "amarillo", "morado"] },
-    { word: "orange", correct: 0, options: ["naranja", "azul", "blanco", "rosa"] },
-    { word: "brown", correct: 2, options: ["verde", "negro", "marron", "gris"] },
-    { word: "gray", correct: 1, options: ["negro", "gris", "blanco", "azul"] },
-    { word: "gold", correct: 0, options: ["dorado", "plateado", "amarillo", "marron"] },
-    { word: "silver", correct: 2, options: ["gris", "blanco", "plateado", "negro"] },
-    { word: "beige", correct: 3, options: ["gris", "blanco", "amarillo", "beige"] },
-    { word: "cyan", correct: 1, options: ["azul", "cian", "verde", "turquesa"] },
-    { word: "magenta", correct: 0, options: ["magenta", "rosa", "rojo", "morado"] },
-    { word: "turquoise", correct: 2, options: ["verde", "azul", "turquesa", "cian"] },
-    { word: "navy", correct: 3, options: ["azul", "negro", "gris", "azul marino"] },
-    { word: "lime", correct: 0, options: ["verde lima", "verde", "amarillo", "cian"] },
-    { word: "violet", correct: 0, options: ["violeta", "morado", "rosa", "azul"] },
-    { word: "peach", correct: 2, options: ["rosa", "naranja", "durazno", "amarillo"] },
-    { word: "mint", correct: 1, options: ["verde", "menta", "cian", "blanco"] },
-    { word: "lavender", correct: 3, options: ["rosa", "lila", "morado", "lavanda"] },
-  ],
-  animals: [
-    { word: "dog", correct: 0, options: ["perro", "gato", "pez", "pajaro"] },
-    { word: "cat", correct: 1, options: ["conejo", "gato", "vaca", "caballo"] },
-    { word: "bird", correct: 2, options: ["pez", "oso", "pajaro", "mono"] },
-    { word: "fish", correct: 3, options: ["leon", "perro", "gato", "pez"] },
-    { word: "horse", correct: 0, options: ["caballo", "vaca", "oso", "conejo"] },
-    { word: "cow", correct: 1, options: ["mono", "vaca", "pez", "pajaro"] },
-    { word: "lion", correct: 2, options: ["oso", "conejo", "leon", "gato"] },
-    { word: "rabbit", correct: 3, options: ["caballo", "leon", "perro", "conejo"] },
-    { word: "monkey", correct: 0, options: ["mono", "pajaro", "vaca", "pez"] },
-    { word: "bear", correct: 2, options: ["gato", "conejo", "oso", "caballo"] }
-  ],
-  numbers: [
-    { word: "one", correct: 0, options: ["uno", "dos", "tres", "cuatro"] },
-    { word: "two", correct: 1, options: ["cinco", "dos", "uno", "seis"] },
-    { word: "three", correct: 2, options: ["ocho", "nueve", "tres", "siete"] },
-    { word: "four", correct: 3, options: ["uno", "diez", "seis", "cuatro"] },
-    { word: "five", correct: 0, options: ["cinco", "dos", "nueve", "ocho"] },
-    { word: "six", correct: 1, options: ["siete", "seis", "tres", "cuatro"] },
-    { word: "seven", correct: 2, options: ["ocho", "cinco", "siete", "dos"] },
-    { word: "eight", correct: 3, options: ["tres", "seis", "uno", "ocho"] },
-    { word: "nine", correct: 0, options: ["nueve", "diez", "cinco", "cuatro"] },
-    { word: "ten", correct: 2, options: ["siete", "tres", "diez", "dos"] }
-  ],
-  objects: [
-    { word: "think", correct: 0, options: ["pensar", "decir", "mirar", "creer"] },
-    { word: "sorry", correct: 1, options: ["gracias", "perdón", "hola", "adiós"] },
-    { word: "turning", correct: 2, options: ["correr", "saltar", "girar", "hablar"] },
-    { word: "tables", correct: 3, options: ["sillas", "puertas", "camas", "mesas"] },
-    { word: "chances", correct: 0, options: ["oportunidades", "errores", "ideas", "cosas"] },
-    { word: "give", correct: 1, options: ["tomar", "dar", "dejar", "hacer"] },
-    { word: "ask", correct: 2, options: ["responder", "decir", "preguntar", "pensar"] },
-    { word: "goes", correct: 3, options: ["viene", "entra", "sale", "va"] },
-    { word: "knows", correct: 0, options: ["sabe", "cree", "piensa", "mira"] },
-    { word: "thinking", correct: 1, options: ["hablando", "pensando", "mirando", "riendo"] },
-    { word: "words", correct: 2, options: ["frases", "letras", "palabras", "nombres"] },
-    { word: "regret", correct: 3, options: ["olvidar", "amar", "pensar", "arrepentir"] },
-    { word: "fire", correct: 0, options: ["fuego", "agua", "aire", "tierra"] },
-    { word: "head", correct: 1, options: ["mano", "cabeza", "pie", "brazo"] },
-    { word: "heard", correct: 2, options: ["ver", "decir", "escuchar", "hablar"] },
-    { word: "accusation", correct: 3, options: ["defensa", "verdad", "error", "acusación"] },
-    { word: "sun", correct: 0, options: ["sol", "luna", "estrella", "cielo"] },
-    { word: "eyes", correct: 1, options: ["nariz", "ojos", "boca", "orejas"] },
-    { word: "lies", correct: 2, options: ["verdades", "hechos", "mentiras", "ideas"] },
-    { word: "believing", correct: 3, options: ["viendo", "escuchando", "pensando", "creyendo"] },
-    { word: "eye", correct: 0, options: ["ojo", "mano", "cara", "pie"] },
-    { word: "sky", correct: 1, options: ["mar", "cielo", "tierra", "nube"] },
-    { word: "looking", correct: 2, options: ["corriendo", "saltando", "mirando", "durmiendo"] },
-    { word: "read", correct: 3, options: ["escribir", "hablar", "escuchar", "leer"] },
-    { word: "mind", correct: 0, options: ["mente", "cuerpo", "alma", "cerebro"] },
-    { word: "maker", correct: 1, options: ["usuario", "creador", "lector", "jugador"] },
-    { word: "rules", correct: 2, options: ["leyes", "juegos", "reglas", "ideas"] },
-    { word: "fools", correct: 3, options: ["sabios", "niños", "adultos", "tontos"] },
-    { word: "cheat", correct: 0, options: ["engañar", "ganar", "perder", "jugar"] },
-    { word: "blind", correct: 1, options: ["ver", "ciego", "mirar", "notar"] },
-    { word: "leave", correct: 2, options: ["entrar", "llegar", "dejar", "seguir"] },
-    { word: "false", correct: 3, options: ["real", "cierto", "correcto", "falso"] },
-    { word: "illusions", correct: 0, options: ["ilusiones", "verdades", "cosas", "ideas"] },
-    { word: "cry", correct: 1, options: ["reír", "llorar", "hablar", "correr"] },
-    { word: "changing", correct: 2, options: ["viendo", "pensando", "cambiando", "creciendo"] },
-    { word: "find", correct: 3, options: ["buscar", "mirar", "perder", "encontrar"] },
-    { word: "live", correct: 0, options: ["vivir", "morir", "existir", "sentir"] },
-    { word: "signs", correct: 1, options: ["letras", "señales", "palabras", "números"] },
-    { word: "deceiving", correct: 2, options: ["ayudando", "creyendo", "engañando", "mirando"] }
-  ],
-  words: [
-    { word: "take", correct: 0, options: ["tomar", "dejar", "romper", "cerrar"] },
-    { word: "down", correct: 1, options: ["arriba", "abajo", "lado", "centro"] },
-    { word: "all", correct: 2, options: ["nada", "poco", "todo", "mitad"] },
-    { word: "mirrors", correct: 0, options: ["espejos", "puertas", "mesas", "paredes"] },
-    { word: "house", correct: 1, options: ["calle", "casa", "edificio", "cuarto"] },
-    { word: "hate", correct: 2, options: ["amar", "querer", "odiar", "sentir"] },
-    { word: "nose", correct: 0, options: ["nariz", "ojo", "boca", "cara"] },
-    { word: "eyes", correct: 1, options: ["manos", "ojos", "piernas", "brazos"] },
-    { word: "mouth", correct: 3, options: ["cabeza", "oido", "nariz", "boca"] },
-    { word: "jokes", correct: 2, options: ["historias", "cuentos", "bromas", "mentiras"] },
-    { word: "laugh", correct: 1, options: ["llorar", "reir", "gritar", "hablar"] },
-    { word: "calls", correct: 0, options: ["llama", "escribe", "busca", "corre"] },
-    { word: "phone", correct: 2, options: ["television", "radio", "telefono", "tablet"] },
-    { word: "ringing", correct: 3, options: ["caminando", "gritando", "mirando", "sonando"] },
-    { word: "baby", correct: 1, options: ["amigo", "bebe", "mama", "papa"] },
-    { word: "leave", correct: 0, options: ["dejar", "entrar", "volver", "seguir"] },
-    { word: "alone", correct: 2, options: ["juntos", "felices", "solo", "rapido"] },
-    { word: "saw", correct: 1, options: ["hizo", "vio", "tomo", "corrio"] },
-    { word: "flaws", correct: 3, options: ["virtudes", "logros", "metas", "defectos"] },
-    { word: "tell", correct: 0, options: ["decir", "escuchar", "ver", "sentir"] },
-    { word: "wrong", correct: 2, options: ["bien", "igual", "mal", "correcto"] },
-    { word: "feeling", correct: 1, options: ["pensar", "sentir", "mirar", "crear"] },
-    { word: "doubts", correct: 3, options: ["certezas", "ideas", "metas", "dudas"] },
-    { word: "wanna", correct: 0, options: ["querer", "poder", "hacer", "tener"] },
-    { word: "die", correct: 2, options: ["vivir", "sonar", "morir", "correr"] },
-    { word: "couch", correct: 1, options: ["mesa", "sofa", "cama", "silla"] },
-    { word: "want", correct: 0, options: ["querer", "dar", "tener", "pedir"] },
-    { word: "never", correct: 3, options: ["siempre", "a veces", "quiza", "nunca"] },
-    { word: "good", correct: 1, options: ["malo", "bueno", "feo", "lento"] },
-    { word: "anything", correct: 2, options: ["algo", "todo", "cualquier cosa", "nada"] },
-    { word: "talk", correct: 0, options: ["hablar", "correr", "saltar", "mirar"] },
-    { word: "buy", correct: 3, options: ["vender", "usar", "romper", "comprar"] },
-    { word: "wedding", correct: 1, options: ["fiesta", "boda", "reunion", "evento"] },
-    { word: "ring", correct: 2, options: ["pulsera", "collar", "anillo", "arete"] },
-    { word: "question", correct: 0, options: ["pregunta", "respuesta", "duda", "idea"] },
-    { word: "matter", correct: 3, options: ["cosa", "vida", "problema", "importar"] },
-    { word: "outside", correct: 1, options: ["adentro", "afuera", "lejos", "cerca"] },
-    { word: "laughing", correct: 2, options: ["llorando", "gritando", "riendo", "callado"] },
-    { word: "another", correct: 0, options: ["otro", "mismo", "igual", "nuevo"] },
-    { word: "dude", correct: 3, options: ["nino", "hombre", "amigo", "tipo"] },
-    { word: "make", correct: 1, options: ["romper", "hacer", "crear", "armar"] },
-    { word: "face", correct: 2, options: ["mano", "pie", "cara", "ojo"] },
-    { word: "feel", correct: 0, options: ["sentir", "ver", "oir", "pensar"] },
-    { word: "ghost", correct: 3, options: ["monstruo", "demonio", "alma", "fantasma"] },
-    { word: "run", correct: 0, options: ["correr", "caminar", "saltar", "parar"] },
-    { word: "walk", correct: 1, options: ["correr", "caminar", "volar", "nadar"] },
-    { word: "jump", correct: 2, options: ["caer", "rodar", "saltar", "subir"] },
-    { word: "sleep", correct: 3, options: ["comer", "beber", "soñar", "dormir"] },
-    { word: "eat", correct: 0, options: ["comer", "beber", "probar", "cocinar"] },
-    { word: "drink", correct: 1, options: ["comer", "beber", "servir", "llenar"] },
-    { word: "cook", correct: 2, options: ["lavar", "cortar", "cocinar", "freir"] },
-    { word: "clean", correct: 3, options: ["ensuciar", "romper", "usar", "limpiar"] },
-    { word: "open", correct: 0, options: ["abrir", "cerrar", "romper", "mover"] },
-    { word: "close", correct: 1, options: ["abrir", "cerrar", "tirar", "empujar"] },
-    { word: "push", correct: 2, options: ["jalar", "mover", "empujar", "parar"] },
-    { word: "pull", correct: 3, options: ["empujar", "soltar", "romper", "jalar"] },
-    { word: "fast", correct: 0, options: ["rapido", "lento", "grande", "fuerte"] },
-    { word: "slow", correct: 1, options: ["rapido", "lento", "alto", "bajo"] },
-    { word: "big", correct: 2, options: ["pequeno", "mediano", "grande", "alto"] },
-    { word: "small", correct: 3, options: ["grande", "largo", "alto", "pequeno"] },
-    { word: "happy", correct: 0, options: ["feliz", "triste", "enojado", "cansado"] },
-    { word: "sad", correct: 1, options: ["feliz", "triste", "emocionado", "calmado"] },
-    { word: "angry", correct: 2, options: ["feliz", "triste", "enojado", "asustado"] },
-    { word: "tired", correct: 3, options: ["activo", "rapido", "fuerte", "cansado"] },
-    { word: "love", correct: 0, options: ["amar", "odiar", "sentir", "querer"] },
-    { word: "hate", correct: 1, options: ["amar", "odiar", "querer", "sentir"] },
-    { word: "think", correct: 2, options: ["sentir", "ver", "pensar", "hablar"] },
-    { word: "know", correct: 3, options: ["pensar", "creer", "ver", "saber"] },
-    { word: "find", correct: 0, options: ["encontrar", "buscar", "perder", "ver"] },
-    { word: "lose", correct: 1, options: ["ganar", "perder", "romper", "tirar"] },
-    { word: "win", correct: 2, options: ["perder", "jugar", "ganar", "intentar"] },
-    { word: "try", correct: 3, options: ["ganar", "perder", "hacer", "intentar"] },
-    { word: "start", correct: 0, options: ["empezar", "terminar", "seguir", "parar"] },
-    { word: "finish", correct: 1, options: ["empezar", "terminar", "pausar", "cerrar"] },
-    { word: "continue", correct: 2, options: ["parar", "terminar", "continuar", "cerrar"] },
-    { word: "stop", correct: 3, options: ["seguir", "correr", "hacer", "parar"] },
-    { word: "help", correct: 0, options: ["ayudar", "molestar", "usar", "ver"] },
-    { word: "need", correct: 1, options: ["querer", "necesitar", "tener", "pedir"] },
-    { word: "give", correct: 2, options: ["recibir", "tomar", "dar", "dejar"] },
-    { word: "take", correct: 3, options: ["dar", "ver", "usar", "tomar"] },
-    { word: "table", correct: 0, options: ["mesa", "silla", "puerta", "libro"] },
-    { word: "chair", correct: 1, options: ["ventana", "silla", "botella", "lapiz"] },
-    { word: "book", correct: 2, options: ["coche", "llave", "libro", "telefono"] },
-    { word: "pencil", correct: 3, options: ["puerta", "mesa", "silla", "lapiz"] },
-    { word: "door", correct: 0, options: ["puerta", "ventana", "libro", "coche"] },
-    { word: "window", correct: 1, options: ["llave", "ventana", "botella", "mesa"] },
-    { word: "car", correct: 2, options: ["telefono", "lapiz", "coche", "puerta"] },
-    { word: "key", correct: 3, options: ["silla", "libro", "ventana", "llave"] },
-    { word: "bottle", correct: 0, options: ["botella", "telefono", "mesa", "coche"] },
-    { word: "phone", correct: 2, options: ["llave", "puerta", "telefono", "libro"] },
-    { word: "lamp", correct: 0, options: ["lampara", "mesa", "silla", "puerta"] },
-    { word: "bed", correct: 1, options: ["sofa", "cama", "mesa", "puerta"] },
-    { word: "sofa", correct: 2, options: ["cama", "silla", "sofa", "mesa"] },
-    { word: "television", correct: 3, options: ["radio", "telefono", "tablet", "television"] },
-    { word: "computer", correct: 0, options: ["computadora", "telefono", "pantalla", "teclado"] },
-    { word: "keyboard", correct: 1, options: ["raton", "teclado", "pantalla", "bocina"] },
-    { word: "mouse", correct: 2, options: ["teclado", "pantalla", "raton", "cable"] },
-    { word: "screen", correct: 3, options: ["teclado", "raton", "bocina", "pantalla"] },
-    { word: "pen", correct: 0, options: ["pluma", "lapiz", "borrador", "cuaderno"] },
-    { word: "eraser", correct: 1, options: ["pluma", "borrador", "libro", "regla"] },
-    { word: "notebook", correct: 2, options: ["libro", "hoja", "cuaderno", "lapiz"] },
-    { word: "backpack", correct: 3, options: ["bolsa", "maleta", "caja", "mochila"] },
-    { word: "glass", correct: 0, options: ["vaso", "botella", "taza", "plato"] },
-    { word: "plate", correct: 1, options: ["cuchara", "plato", "tenedor", "vaso"] },
-    { word: "spoon", correct: 2, options: ["tenedor", "cuchillo", "cuchara", "plato"] },
-    { word: "fork", correct: 3, options: ["cuchara", "cuchillo", "plato", "tenedor"] },
-    { word: "knife", correct: 0, options: ["cuchillo", "tenedor", "cuchara", "plato"] },
-    { word: "cup", correct: 1, options: ["vaso", "taza", "plato", "botella"] },
-    { word: "mirror", correct: 2, options: ["puerta", "ventana", "espejo", "pared"] },
-    { word: "clock", correct: 3, options: ["reloj", "calendario", "alarma", "reloj de pared"] },
-    { word: "fan", correct: 0, options: ["ventilador", "aire", "luz", "calor"] },
-    { word: "air conditioner", correct: 1, options: ["ventilador", "aire acondicionado", "calefaccion", "luz"] },
-    { word: "heater", correct: 2, options: ["ventilador", "aire", "calentador", "luz"] },
-    { word: "light", correct: 3, options: ["sombra", "foco", "energia", "luz"] },
-    { word: "bag", correct: 0, options: ["bolsa", "mochila", "caja", "maleta"] },
-    { word: "box", correct: 1, options: ["bolsa", "caja", "maleta", "contenedor"] },
-    { word: "wallet", correct: 2, options: ["bolsa", "mochila", "cartera", "caja"] },
-    { word: "watch", correct: 3, options: ["reloj", "pulsera", "anillo", "reloj de mano"] },
-    { word: "brush", correct: 0, options: ["cepillo", "peine", "toalla", "jabon"] },
-    { word: "comb", correct: 1, options: ["cepillo", "peine", "toalla", "shampoo"] },
-    { word: "towel", correct: 2, options: ["jabón", "cepillo", "toalla", "esponja"] },
-    { word: "soap", correct: 3, options: ["agua", "toalla", "shampoo", "jabon"] }
-  ]
+function makePairs(raw) {
+  return raw
+    .trim()
+    .split("\n")
+    .map((line) => {
+      const [word, answer] = line.split("|");
+      return { word: word.trim(), answer: answer.trim() };
+    });
+}
+
+function hashText(text) {
+  let hash = 0;
+  for (let index = 0; index < text.length; index += 1) {
+    hash = (hash * 31 + text.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function buildQuestions(items) {
+  const answers = [...new Set(items.map((item) => item.answer))];
+
+  return items.map((item) => {
+    const distractors = answers.filter((answer) => answer !== item.answer);
+    const start = hashText(item.word) % distractors.length;
+    const options = [item.answer];
+
+    for (let offset = 0; options.length < 4 && offset < distractors.length; offset += 1) {
+      const candidate = distractors[(start + offset) % distractors.length];
+      if (!options.includes(candidate)) {
+        options.push(candidate);
+      }
+    }
+
+    const correct = hashText(`${item.word}-${item.answer}`) % options.length;
+    const [answer] = options.splice(0, 1);
+    options.splice(correct, 0, answer);
+
+    return {
+      word: item.word,
+      correct,
+      options
+    };
+  });
+}
+
+const vocabularyByLevel = {
+  a1: makePairs(`
+hello|hola
+goodbye|adios
+please|por favor
+thanks|gracias
+yes|si
+no|no
+man|hombre
+woman|mujer
+boy|nino
+girl|nina
+child|infante
+friend|amigo
+family|familia
+mother|madre
+father|padre
+brother|hermano
+sister|hermana
+baby|bebe
+name|nombre
+home|hogar
+house|casa
+room|habitacion
+door|puerta
+window|ventana
+table|mesa
+chair|silla
+bed|cama
+sofa|sofa
+lamp|lampara
+floor|piso
+wall|pared
+roof|techo
+kitchen|cocina
+bathroom|bano
+school|escuela
+class|clase
+teacher|maestro
+student|estudiante
+book|libro
+page|pagina
+pen|pluma
+pencil|lapiz
+bag|bolsa
+phone|telefono
+computer|computadora
+screen|pantalla
+car|auto
+bus|autobus
+train|tren
+bike|bicicleta
+street|calle
+city|ciudad
+park|parque
+store|tienda
+market|mercado
+money|dinero
+water|agua
+milk|leche
+coffee|cafe
+tea|te
+bread|pan
+rice|arroz
+egg|huevo
+cheese|queso
+meat|carne
+fish|pescado
+chicken|pollo
+apple|manzana
+banana|platano
+orange|naranja
+potato|papa
+tomato|tomate
+salt|sal
+sugar|azucar
+breakfast|desayuno
+lunch|comida
+dinner|cena
+day|dia
+night|noche
+morning|manana
+afternoon|tarde
+evening|anochecer
+today|hoy
+tomorrow|manana futuro
+yesterday|ayer
+week|semana
+month|mes
+year|ano
+time|tiempo
+hour|hora
+minute|minuto
+one|uno
+two|dos
+three|tres
+four|cuatro
+five|cinco
+six|seis
+seven|siete
+eight|ocho
+nine|nueve
+ten|diez
+first|primero
+last|ultimo
+big|grande
+small|pequeno
+long|largo
+short|corto
+new|nuevo
+old|viejo
+young|joven
+good|bueno
+bad|malo
+hot|caliente
+cold|frio
+warm|tibio
+cool|fresco
+happy|feliz
+sad|triste
+tired|cansado
+sick|enfermo
+hungry|hambriento
+thirsty|sediento
+fast|rapido
+slow|lento
+easy|facil
+hard|dificil
+right|derecho
+left|izquierdo
+near|cerca
+far|lejos
+open|abierto
+closed|cerrado
+red|rojo
+blue|azul
+green|verde
+yellow|amarillo
+black|negro
+white|blanco
+brown|marron
+gray|gris
+pink|rosa
+purple|morado
+dog|perro
+cat|gato
+bird|pajaro
+horse|caballo
+cow|vaca
+pig|cerdo
+mouse|raton
+fish animal|pez
+sun|sol
+moon|luna
+star|estrella
+sky|cielo
+rain|lluvia
+snow|nieve
+wind|viento
+tree|arbol
+flower|flor
+grass|cesped
+hand|mano
+arm|brazo
+leg|pierna
+foot|pie
+head|cabeza
+face|cara
+eye|ojo
+ear|oreja
+nose|nariz
+mouth|boca
+hair|cabello
+heart|corazon
+go|ir
+come|venir
+see|ver
+look|mirar
+hear|oir
+listen|escuchar
+speak|hablar
+say|decir
+read|leer
+write|escribir
+eat|comer
+drink|beber
+sleep|dormir
+walk|caminar
+run|correr
+sit|sentarse
+stand|pararse
+buy|comprar
+pay|pagar
+have|tener
+want|querer
+need|necesitar
+like|gustar
+love|amar
+play|jugar
+work|trabajar
+study|estudiar
+live|vivir
+`),
+  a2: makePairs(`
+about|acerca de
+above|encima
+across|a traves
+address|direccion
+advice|consejo
+afraid|asustado
+against|contra
+airport|aeropuerto
+almost|casi
+already|ya
+although|aunque
+always|siempre
+among|entre varios
+answer|respuesta
+anyone|cualquiera
+anything|cualquier cosa
+apartment|departamento
+arrive|llegar
+artist|artista
+asleep|dormido
+attend|asistir
+autumn|otono
+available|disponible
+avoid|evitar
+backpack|mochila
+bank|banco
+beach|playa
+because|porque
+become|volverse
+before|antes
+behind|detras
+believe|creer
+belong|pertenecer
+below|debajo
+between|entre dos
+bicycle|bicicleta
+blanket|cobija
+borrow|pedir prestado
+bring|traer
+building|edificio
+business|negocio
+busy|ocupado
+button|boton
+calendar|calendario
+camera|camara
+careful|cuidadoso
+carry|cargar
+catch|atrapar
+center|centro
+chance|oportunidad
+change|cambio
+cheap|barato
+choose|elegir
+church|iglesia
+circle|circulo
+clean|limpio
+climb|subir
+cloud|nube
+college|universidad
+comfortable|comodo
+company|empresa
+compare|comparar
+complete|completo
+concert|concierto
+corner|esquina
+country|pais
+course|curso
+crowded|lleno de gente
+customer|cliente
+dangerous|peligroso
+decide|decidir
+deep|profundo
+delicious|delicioso
+describe|describir
+different|diferente
+difficult|dificil
+direction|direccion rumbo
+dirty|sucio
+discount|descuento
+disease|enfermedad
+doctor|doctor
+driver|conductor
+during|durante
+each|cada
+early|temprano
+earn|ganar dinero
+education|educacion
+either|cualquiera de dos
+elevator|elevador
+empty|vacio
+enough|suficiente
+entrance|entrada
+environment|ambiente
+especially|especialmente
+even|incluso
+event|evento
+everywhere|en todas partes
+excellent|excelente
+except|excepto
+excited|emocionado
+expensive|caro
+explain|explicar
+factory|fabrica
+famous|famoso
+favorite|favorito
+fever|fiebre
+field|campo
+finally|finalmente
+flight|vuelo
+foreign|extranjero
+forget|olvidar
+form|formulario
+friendly|amable
+future|futuro
+garbage|basura
+garden|jardin
+guest|invitado
+guide|guia
+healthy|saludable
+heavy|pesado
+hill|colina
+holiday|vacaciones
+hotel|hotel
+however|sin embargo
+important|importante
+improve|mejorar
+inside|adentro
+instead|en lugar de
+interest|interes
+invite|invitar
+island|isla
+journey|viaje largo
+keyboard|teclado
+language|idioma
+later|despues
+learn|aprender
+leave|salir
+lend|prestar
+lesson|leccion
+library|biblioteca
+local|local
+machine|maquina
+manager|gerente
+medicine|medicina
+meeting|reunion
+message|mensaje
+mirror|espejo
+modern|moderno
+mountain|montana
+museum|museo
+necessary|necesario
+neighbor|vecino
+noise|ruido
+office|oficina
+opinion|opinion
+opposite|opuesto
+outside|afuera
+passenger|pasajero
+passport|pasaporte
+patient|paciente
+perfect|perfecto
+perhaps|quizas
+photograph|fotografia
+planet|planeta
+pleased|contento
+pocket|bolsillo
+police|policia
+possible|posible
+practice|practica
+prefer|preferir
+prepare|preparar
+present|regalo
+problem|problema
+promise|promesa
+quiet|silencioso
+reason|razon
+receipt|recibo
+recent|reciente
+recommend|recomendar
+remember|recordar
+repair|reparar
+repeat|repetir
+report|informe
+restaurant|restaurante
+return|regresar
+safe|seguro
+salary|salario
+save|ahorrar
+schedule|horario
+search|buscar
+season|temporada
+secret|secreto
+several|varios
+share|compartir
+shop assistant|dependiente
+shoulder|hombro
+similar|similar
+simple|simple
+since|desde
+snack|botana
+somewhere|en algun lugar
+soon|pronto
+special|especial
+square|cuadrado
+station|estacion
+straight|recto
+strange|extrano
+successful|exitoso
+suitcase|maleta
+surprise|sorpresa
+swimming pool|alberca
+tablet|tableta
+theater|teatro
+ticket|boleto
+together|juntos
+traffic|trafico
+travel|viajar
+umbrella|paraguas
+understand|entender
+useful|util
+visitor|visitante
+waiter|mesero
+weather|clima
+without|sin
+wonderful|maravilloso
+`),
+  a3: makePairs(`
+ability|habilidad
+abroad|en el extranjero
+accept|aceptar
+accident|accidente
+according|segun
+achieve|lograr
+active|activo
+actually|en realidad
+advantage|ventaja
+advertise|anunciar
+affect|afectar
+agreement|acuerdo
+allow|permitir
+amazing|asombroso
+amount|cantidad
+apologize|disculparse
+appear|aparecer
+application|solicitud
+appointment|cita
+argue|discutir
+arrangement|arreglo
+article|articulo
+average|promedio
+background|antecedente
+balance|equilibrio
+basic|basico
+behavior|comportamiento
+benefit|beneficio
+border|frontera
+branch|sucursal
+brief|breve
+career|carrera
+challenge|reto
+character|personaje
+charge|cobrar
+choice|eleccion
+claim|afirmacion
+coach|entrenador
+collect|recolectar
+common|comun
+community|comunidad
+condition|condicion
+conference|conferencia
+connect|conectar
+consider|considerar
+contain|contener
+continue|continuar
+contract|contrato
+convenient|conveniente
+conversation|conversacion
+create|crear
+culture|cultura
+damage|dano
+deal|trato
+degree|grado
+deliver|entregar
+demand|demanda
+department|departamento area
+depend|depender
+develop|desarrollar
+difference|diferencia
+direct|directo
+disappear|desaparecer
+discover|descubrir
+discussion|debate
+effort|esfuerzo
+employee|empleado
+employer|empleador
+encourage|animar
+energy|energia
+engine|motor
+enjoyable|agradable
+enter|entrar
+entire|entero
+equipment|equipo
+error|error
+evidence|evidencia
+experience|experiencia
+expert|experto
+fair|justo
+fault|culpa
+feature|caracteristica
+female|femenino
+figure|cifra
+financial|financiero
+focus|enfocarse
+force|fuerza
+freedom|libertad
+fresh|fresco
+function|funcion
+generally|generalmente
+government|gobierno
+growth|crecimiento
+habit|habito
+handle|manejar
+hardly|apenas
+health|salud
+hire|contratar
+imagine|imaginar
+immediate|inmediato
+include|incluir
+increase|aumentar
+industry|industria
+influence|influencia
+instead of|en vez de
+instruction|instruccion
+international|internacional
+interview|entrevista
+introduce|presentar
+involve|involucrar
+knowledge|conocimiento
+lawyer|abogado
+leader|lider
+least|menos
+level|nivel
+likely|probable
+limit|limite
+manage|gestionar
+material|material
+measure|medir
+method|metodo
+mistake|error
+movement|movimiento
+natural|natural
+network|red
+offer|oferta
+opportunity|oportunidad
+ordinary|ordinario
+organization|organizacion
+original|original
+particular|particular
+perform|realizar
+personal|personal
+physical|fisico
+position|puesto
+positive|positivo
+powerful|poderoso
+pressure|presion
+previous|previo
+process|proceso
+produce|producir
+professional|profesional
+progress|progreso
+property|propiedad
+purpose|proposito
+quality|calidad
+raise|aumentar
+rather|mas bien
+reach|alcanzar
+realize|darse cuenta
+receive|recibir
+reduce|reducir
+refuse|rechazar
+relationship|relacion
+remain|permanecer
+remove|quitar
+replace|reemplazar
+require|requerir
+research|investigacion
+resource|recurso
+result|resultado
+review|revision
+routine|rutina
+section|seccion
+serious|serio
+service|servicio
+similarity|similitud
+situation|situacion
+skill|destreza
+solution|solucion
+source|fuente
+specific|especifico
+standard|estandar
+statement|declaracion
+strategy|estrategia
+strength|fortaleza
+structure|estructura
+success|exito
+support|apoyo
+survey|encuesta
+system|sistema
+task|tarea
+technology|tecnologia
+term|termino
+though|aunque
+tool|herramienta
+training|capacitacion
+treat|tratar
+trend|tendencia
+typical|tipico
+value|valor
+variety|variedad
+website|sitio web
+whether|si condicional
+wide|amplio
+`),
 };
 
+const quizData = Object.fromEntries(
+  Object.entries(vocabularyByLevel).map(([level, items]) => [level, buildQuestions(items)])
+);
+
 if (typeof window !== "undefined") {
+  window.vocabularyByLevel = vocabularyByLevel;
   window.quizData = quizData;
 }

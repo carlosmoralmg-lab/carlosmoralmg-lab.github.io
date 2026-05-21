@@ -1,80 +1,157 @@
+:root {
+    color-scheme: dark;
+    --bg: #111827;
+    --panel: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --a1: #7c3aed;
+    --a2: #0284c7;
+    --a3: #059669;
+    --ok: #10b981;
+    --bad: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 .welcome {
-    background: black;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.22), transparent 28rem),
+        radial-gradient(circle at bottom right, rgba(5, 150, 105, 0.18), transparent 26rem),
+        var(--bg);
     margin: 0;
-    padding: 0;
+    padding: 0 0 32px;
     border: 0;
-    font-family: "Poppins", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo {
+    background: white;
+    text-align: center;
+    padding: 18px;
+    font-size: 28px;
+    font-weight: 800;
+    border-radius: 0 0 18px 18px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    letter-spacing: 0;
+}
+
+.slogan {
+    width: min(90vw, 620px);
+    margin: 34px auto 24px;
+    color: white;
+    text-align: center;
+}
+
+.slogan p {
+    margin: 0;
+}
+
+.slogan p:first-child {
+    font-size: clamp(26px, 8vw, 42px);
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.slogan p:last-child {
+    margin-top: 12px;
+    color: #d1d5db;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+.list {
+    width: min(92vw, 520px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.list_item {
+    min-height: 88px;
+    text-decoration: none;
+    color: white;
+    padding: 18px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 0 18px 32px rgba(0, 0, 0, 0.22);
+}
+
+.list_item span {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.list_item small {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 14px;
+    text-align: right;
 }
 
 .game-page {
     min-height: 100vh;
 }
 
-.logo {
-    background: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    border-radius: 0px 00px 20px 20px;
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
-.slogan {
-    color: white;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.list {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.list_item {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    width: 60%;
-    min-width: 200px;
-    max-width: 90%;
-    margin: auto;
-    padding: 20px 0px;
-    border-radius: 20px;
-}
-
-/* CODE IA */
-
 .game-shell {
-    width: min(92vw, 520px);
-    margin: 32px auto 0;
+    width: min(92vw, 560px);
+    margin: 28px auto 0;
 }
 
 .game-header {
     color: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 16px;
     font-size: 14px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+}
+
+.game-header p {
+    margin: 0;
+}
+
+.game-category {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.game-progress {
+    color: #d1d5db;
+    text-align: right;
 }
 
 .game-card {
-    background: white;
-    border-radius: 24px;
+    background: var(--panel);
+    border-radius: 8px;
     padding: 24px;
+    color: var(--text);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+}
+
+.answer-label {
+    margin: 0 0 10px;
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
 }
 
 .game-word {
     text-align: center;
-    font-size: 34px;
-    font-weight: 700;
-    margin: 0 0 20px;
+    font-size: clamp(34px, 12vw, 56px);
+    line-height: 1;
+    font-weight: 800;
+    margin: 0 0 24px;
+    overflow-wrap: anywhere;
 }
 
 .options {
@@ -83,22 +160,31 @@
 }
 
 .option-button {
-    border: 0;
-    border-radius: 16px;
+    width: 100%;
+    min-height: 54px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
     padding: 14px 16px;
     font-size: 16px;
     font-weight: 700;
-    background: #f3f3f3;
+    background: #f9fafb;
     color: #111;
+    cursor: pointer;
+}
+
+.option-button:disabled {
+    cursor: default;
 }
 
 .option-button.correct {
-    background: #00f5d4;
-    color: #00352f;
+    background: var(--ok);
+    border-color: var(--ok);
+    color: white;
 }
 
 .option-button.wrong {
-    background: #f15bb5;
+    background: var(--bad);
+    border-color: var(--bad);
     color: white;
 }
 
@@ -108,24 +194,34 @@
     margin: 0;
 }
 
-/* COLORS BACKGROUND */
+.finish-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 8px;
+    padding: 0 18px;
+    border-radius: 8px;
+    background: var(--bg);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+}
 
 .purple {
-    background-color: #9b5de5;
-}
-
-.pink {
-    background-color: #f15bb5;
-}
-
-.yellow {
-    background-color: #fee440;
+    background-color: var(--a1);
 }
 
 .blue {
-    background-color: #00bbf9;
+    background-color: var(--a2);
 }
 
 .green {
-    background-color: #00f5d4;
+    background-color: var(--a3);
+}
+
+@media (min-width: 640px) {
+    .options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
